@@ -6,4 +6,5 @@ scikit-learn
 imbalanced-learn
 redis
 flask
-
+alibi_detect
+prometheus_client

@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from flask import Flask,render_template,request,jsonify
 from src.logger import get_logger
+
 from alibi_detect.cd import KSDrift
 from src.feature_store import RedisFeatureStore
 from sklearn.preprocessing import StandardScaler
@@ -37,8 +38,8 @@ def fit_scaler_on_ref_data():
     return scaler.transform(all_features_df)
 
 
-historical_data = fit_scaler_on_ref_data()
-ksd = KSDrift(x_ref=historical_data , p_val=0.05)
+historical_data = fit_scaler_on_ref_data() ## Reference data
+ksd = KSDrift(x_ref=historical_data , p_val=0.05) # Used to do drift detection
 
 
 @app.route('/')
