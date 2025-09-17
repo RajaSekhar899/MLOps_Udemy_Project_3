@@ -15,7 +15,9 @@ logger = get_logger(__name__)
 
 app = Flask(__name__ , template_folder="templates")
 
+## Counting no of predictions made
 prediction_count = Counter('prediction_count' , " Number of prediction count" )
+# Counting no of times drift is detected.
 drift_count = Counter('drift_count' , "Numer of times data drift is detected")
 
 MODEL_PATH = "artifacts/models/random_forest_model.pkl"
@@ -78,11 +80,11 @@ def predict():
             print("Drift Detected....")
             logger.info("Drift Detected....")
 
-            drift_count.inc()
+            drift_count.inc() # To count the no of drift founds
 
 
         prediction = model.predict(features)[0]
-        prediction_count.inc()
+        prediction_count.inc()## Count thr no of predictions made
 
         result = 'Survived' if prediction==1 else 'Did Not Survive'
 
